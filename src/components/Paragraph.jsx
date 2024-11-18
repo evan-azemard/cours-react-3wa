@@ -4,6 +4,6 @@ export const Paragraph = () => {
 	const bool = false;
 
 	return (
-		<h1>{bool && hello ||goodBy}</h1>
+		<p>{bool && hello ||goodBy}</p>
 	)
 }
