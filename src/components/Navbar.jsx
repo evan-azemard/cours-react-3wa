@@ -4,6 +4,6 @@ export const Navbar = () => {
 	return <>
 		<Link to='/'>Accueil</Link> |
 		<Link to='/users'>Utilisateur</Link> |
-		<Link to='/posts/:postId'>PostID</Link>
+		<Link to='/posts/'>Posts</Link>
 	</>
 }

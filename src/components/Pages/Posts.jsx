@@ -1,41 +1,36 @@
 import { useEffect,useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export const Posts = () => {
 	const [data, setData] = useState([]);
-	const [id, setId] = useState('');
+	const [loading, setLoading] = useState(true)
 
 	useEffect(() => {
 		const fetchData = async () => {
-			if(id){
-				try{
-					const response = await axios.get(`https://jsonplaceholder.org/posts/${id}`)
-					setData(response.data);
-					console.log(data);
-				}catch(e){
-					console.log(e.message);
-				}
+			try{
+				const response = await axios.get(`https://jsonplaceholder.org/posts`);
+				if(response.data) setData(response.data);
+				setLoading(false)
+			}catch(e){
+				console.log(e.message);
+				setLoading(false)
+
 			}
 		}
 
 		fetchData();
-	}, [id])
+	}, [])
 
-
+	if(loading) return <p>Chargement en cours...</p>
 	return <>
-		<form>
-			<input
-				onChange={(e) => setId(e.target.value)}
-				type='number'
-				placeholder='Seléctionne une id'
-				value={id}
-			/>
-		</form>
-		{data &&
-			<div>
-				<h1>{data.title}</h1>
-				<p>{data.content}</p>
-			</div>
-		}
+		<h1>Liste des posts:</h1>
+		<ul>
+			{data.map((datum) => (
+				<Link key={datum.id} to={`/post/${datum.id}`} >
+					<li>{datum.title}></li>
+				</Link>
+			))}
+		</ul>
 	</>
 }

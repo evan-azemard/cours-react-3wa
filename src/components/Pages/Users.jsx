@@ -4,7 +4,6 @@ import { useEffect,useState } from "react";
 export const Users = () => {
 	const [data, setData] = useState([]);
 	const [loading,setLoading] = useState(true);
-
 	useEffect(() => {
 		const fetchData = async () => {
 			try{
